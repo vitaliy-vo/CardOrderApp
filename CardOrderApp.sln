@@ -1,0 +1,54 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.14.36401.2
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardOrderApp.DAL", "CardOrderApp.DAL\CardOrderApp.DAL.csproj", "{6BAF2E5D-7553-432D-A2F7-BCF68079B56D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardOrderApp.Core", "CardOrderApp.Core\CardOrderApp.Core.csproj", "{B13CBF07-3F8B-4108-91B9-EFFFA0739E37}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardOrderApp.BLL", "CardOrderApp.BLL\CardOrderApp.BLL.csproj", "{A0ED11CE-2791-4A80-846F-8B8E16772341}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CardOrderApp.ForDebug", "CardOrderApp.ForDebug\CardOrderApp.ForDebug.csproj", "{2B5700D8-CC30-4E2D-A8F5-34F032BDD038}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppUI", "WpfAppUI\WpfAppUI.csproj", "{7D8C1A8E-E0F3-4E29-B54E-E778E8DD4518}"
+	ProjectSection(ProjectDependencies) = postProject
+		{6BAF2E5D-7553-432D-A2F7-BCF68079B56D} = {6BAF2E5D-7553-432D-A2F7-BCF68079B56D}
+		{A0ED11CE-2791-4A80-846F-8B8E16772341} = {A0ED11CE-2791-4A80-846F-8B8E16772341}
+		{B13CBF07-3F8B-4108-91B9-EFFFA0739E37} = {B13CBF07-3F8B-4108-91B9-EFFFA0739E37}
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6BAF2E5D-7553-432D-A2F7-BCF68079B56D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6BAF2E5D-7553-432D-A2F7-BCF68079B56D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6BAF2E5D-7553-432D-A2F7-BCF68079B56D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6BAF2E5D-7553-432D-A2F7-BCF68079B56D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B13CBF07-3F8B-4108-91B9-EFFFA0739E37}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B13CBF07-3F8B-4108-91B9-EFFFA0739E37}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B13CBF07-3F8B-4108-91B9-EFFFA0739E37}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B13CBF07-3F8B-4108-91B9-EFFFA0739E37}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0ED11CE-2791-4A80-846F-8B8E16772341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0ED11CE-2791-4A80-846F-8B8E16772341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0ED11CE-2791-4A80-846F-8B8E16772341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0ED11CE-2791-4A80-846F-8B8E16772341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B5700D8-CC30-4E2D-A8F5-34F032BDD038}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B5700D8-CC30-4E2D-A8F5-34F032BDD038}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B5700D8-CC30-4E2D-A8F5-34F032BDD038}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B5700D8-CC30-4E2D-A8F5-34F032BDD038}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7D8C1A8E-E0F3-4E29-B54E-E778E8DD4518}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7D8C1A8E-E0F3-4E29-B54E-E778E8DD4518}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7D8C1A8E-E0F3-4E29-B54E-E778E8DD4518}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7D8C1A8E-E0F3-4E29-B54E-E778E8DD4518}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {26C913BF-1AA6-4963-9EDF-A8B7EEE1569A}
+	EndGlobalSection
+EndGlobal

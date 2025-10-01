@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CardOrderApp.BLL\CardOrderApp.BLL.csproj" />
+    <ProjectReference Include="..\CardOrderApp.Core\CardOrderApp.Core.csproj" />
+    <ProjectReference Include="..\CardOrderApp.DAL\CardOrderApp.DAL.csproj" />
+  </ItemGroup>
+
+</Project>
