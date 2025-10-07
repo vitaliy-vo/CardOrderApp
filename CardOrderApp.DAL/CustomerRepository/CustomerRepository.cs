@@ -201,13 +201,26 @@ namespace CardOrderApp.DAL.CustomerRepository
                 command.Parameters.AddWithValue("@Email", (object)customer.Email ?? DBNull.Value);
                 command.Parameters.AddWithValue("@IsActive", customer.IsActive);
 
+                
 
+                try
+                {
+                    var result = command.ExecuteScalar();
+                    if (result == null)
+                        throw new Exception("Не удалось получить ID созданного клиента");
 
-                return (int)command.ExecuteScalar();
+                    return (int)result;
+                }
+                catch (Exception ex)
+                {
+                    // Логирование ошибки
+                    throw new Exception("Ошибка при создании клиента", ex);
+                }
             }
+        }
         }
             
 
 
     }
-}
+

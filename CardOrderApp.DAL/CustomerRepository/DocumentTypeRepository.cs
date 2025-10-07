@@ -5,14 +5,14 @@ using Npgsql;
 
 namespace CardOrderApp.DAL.CustomerRepository
 {
-    public class DocumetTypeRepository : IDocumetTypeRepository
+    public class DocumentTypeRepository : IDocumentTypeRepository
     {
-        public Dictionary<int, DocumetTypeDto> GetTypeDocuments()
+        public Dictionary<string, DocumetTypeDto> GetAllDocumentTypes()
         {
             {
                 using (NpgsqlConnection connection = new NpgsqlConnection(Options.ConnectionString))
                 {
-                    connection.Open();
+                   connection.Open();
 
                     NpgsqlCommand command = new NpgsqlCommand(DocumentTypeQuery.GetTypeDocuments, connection);
 
@@ -20,10 +20,10 @@ namespace CardOrderApp.DAL.CustomerRepository
                     NpgsqlDataReader reader = command.ExecuteReader();
 
 
-                    var typeDocuments = new Dictionary<int, DocumetTypeDto>();
-                    while (reader.Read())
+                    var typeDocuments = new Dictionary<string, DocumetTypeDto>();
+                    while ( reader.Read())
                     {
-                        typeDocuments.Add(reader.GetInt32(0), new DocumetTypeDto
+                        typeDocuments.Add(reader.GetString(1), new DocumetTypeDto
                         {
                             DocumentTypeId = reader.GetInt32(0),
                             Name = reader.GetString(1),
@@ -38,5 +38,7 @@ namespace CardOrderApp.DAL.CustomerRepository
                 }
             }
         }
+
+       
     }
 }

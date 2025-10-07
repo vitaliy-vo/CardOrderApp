@@ -18,5 +18,15 @@ namespace CardOrderApp.Core.Dtos.ProductDto
         {
             return $"Id={Id} Name={Name}  PaymentSystem={PaymentSystem} TypeCard={TypeCard}";
         }
+
+        public override bool Equals(object? obj)
+        {
+            return base.Equals(obj);
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
     }
 }

@@ -13,88 +13,109 @@ namespace WpfAppUI
     /// </summary>
     public partial class AddClientWindow : Window
     {
-        private ICustomerManager _customerManager=new CustomerManager();
-        private ICustomerRepository _customerRepository;
-        private ICustomerDocumentRepository _customerDocumentRepository;
-        private IDocumetTypeRepository _documetTypeRepository;
-        Dictionary<String, int> dicId;
+        private readonly ICustomerManager _customerManager;
+        private readonly ICustomerRepository _customerRepository;
+        private readonly ICustomerDocumentRepository _customerDocumentRepository;
+        private readonly IDocumentTypeRepository _documentTypeRepository;
+        Dictionary<string, DocumetTypeDto> _documentTypeDict;
 
 
-        public AddClientWindow()
+
+        public AddClientWindow(
+            ICustomerManager customerManager,
+            ICustomerRepository customerRepository,
+            ICustomerDocumentRepository customerDocumentRepository,
+            IDocumentTypeRepository documentTypeRepository)
         {
+            _customerManager = customerManager;
+            _customerRepository = customerRepository;
+            _customerDocumentRepository= customerDocumentRepository;
+            _documentTypeRepository = documentTypeRepository;
+            _documentTypeDict = _documentTypeRepository.GetAllDocumentTypes();
             InitializeComponent();
-            _documetTypeRepository = new DocumetTypeRepository();
-            _customerDocumentRepository=new CustomerDocumentRepository();
-            Dictionary<int, DocumetTypeDto> documentType = _documetTypeRepository.GetTypeDocuments();
-            dicId = new Dictionary<string,int>();
-            dicId.Clear();
-            ComboBox.Items.Clear();
-            foreach (var item in documentType)
-            {
-                ComboBox.Items.Add(item.Value.Name);
-                dicId.Add(item.Value.Name, item.Value.DocumentTypeId);
-            }
-            
+
 
         }
 
+
+
+
+
         private void SaveButton_Click(object sender, RoutedEventArgs e)
         {
-            _customerRepository = new CustomerRepository();
-            
-
-            // Валидация данных
+            // 1. Data Validation
             if (string.IsNullOrWhiteSpace(FullNameTextBox.Text))
             {
                 MessageBox.Show("Введите ФИО клиента", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return;
             }
 
-            String fullName = FullNameTextBox.Text;
-
-     
-
-            // Создание нового клиента
-            var newClient = new CustomerInputModel
+            
+            var nameParts = FullNameTextBox.Text.Split(' ', StringSplitOptions.RemoveEmptyEntries);
+            if (nameParts.Length < 2)
             {
-                FirstName = fullName.Split(' ')[0],
-                LastName = fullName.Split(' ')[1],
-                MiddleName = fullName.Split(' ')[2],
-                BirthDate = Datapicker.DisplayDate,
-                PhoneNumber = PhoneTextBox.Text,
-                Email = EmailTextBox.Text,
-                IsActive = true,
-                RegistrationDate = DateTime.Now
+                MessageBox.Show("Введите фамилию и имя (через пробел)", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-
-            };
-
-
-
-           CustomerDto customer= _customerManager.AddClient(newClient);
-           
-          int idCustomer= _customerRepository.CreateCustomer(customer);
-
-            var newDocument = new CustomerDocumentInputModel
+            if (_documentTypeDict == null)
             {
-      
-            СustomerId= idCustomer,
-                 DocumentTypeId= dicId.GetValueOrDefault(ComboBox.Text),
-                Series= PSeries.Text,
-                Number= PNum.Text,
-                IssueDate= Datapicker2.DisplayDate,
-                DepartmentCode= KP.Text
+                MessageBox.Show("Выберите тип документа", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-            };
-            CustomerDocumentDto customerDocumentDto= _customerManager.AddDocument(newDocument);
+            if (!string.IsNullOrEmpty(PhoneTextBox.Text) &&
+                           !System.Text.RegularExpressions.Regex.IsMatch(PhoneTextBox.Text,
+                           @"^[\d\s\-\+\(\)]+$"))
+            {
+                MessageBox.Show("Телефон не соответствует формату", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return;
+            }
 
-            _customerDocumentRepository.CreateDocument(customerDocumentDto);
+                try
+            {
+                // 2. Create Customer
+                var newClient = new CustomerInputModel
+                {
+                    FirstName = nameParts[0],
+                    LastName = nameParts[1],
+                    MiddleName = nameParts.Length > 2 ? nameParts[2] : null, 
+                    BirthDate = Datapicker.SelectedDate ?? DateTime.Now, 
+                    PhoneNumber = PhoneTextBox.Text,
+                    Email = EmailTextBox.Text,
+                    IsActive = true,
+                    RegistrationDate = DateTime.Now
+                };
 
 
 
+                CustomerDto customer = _customerManager.AddClient(newClient);
+                int idCustomer = _customerRepository.CreateCustomer(customer);
 
-            DialogResult = true;
-            Close();
+
+            
+
+                // 3. Create Document
+                 var newDocument = new CustomerDocumentInputModel
+                 {
+                     СustomerId = idCustomer,
+                     DocumentTypeId = _documentTypeDict[ComboBox.Text].DocumentTypeId,
+                     Series = PSeries.Text,
+                     Number = PNum.Text,
+                     IssueDate = Datapicker2.SelectedDate ?? DateTime.Now, 
+                     DepartmentCode = KP.Text
+                 };
+
+                 CustomerDocumentDto customerDocumentDto = _customerManager.AddDocument(newDocument);
+                 _customerDocumentRepository.CreateDocument(customerDocumentDto);
+
+                 DialogResult = true;
+                Close();
+            }
+            catch (Exception ex)
+            {
+               MessageBox.Show($"Произошла ошибка при сохранении: {ex.Message}", "Ошибка", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

@@ -16,7 +16,7 @@ namespace CardOrderApp.DAL.CustomerRepository
 {
     public class CustomerDocumentRepository : ICustomerDocumentRepository
     {
-        public void UpdateDocumetById(CustomerDocumentDto document)
+        public void UpdateDocumet(CustomerDocumentDto document)
         {
             using (NpgsqlConnection connection = new NpgsqlConnection(Options.ConnectionString))
             {

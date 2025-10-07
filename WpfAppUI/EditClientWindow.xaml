@@ -1,0 +1,71 @@
+﻿<Window x:Class="WpfAppUI.EditClientWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Изменение данных клиента" Height="511" Width="527"
+        WindowStartupLocation="CenterOwner"
+        ResizeMode="NoResize">
+    <Grid Margin="15">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+            <RowDefinition Height="Auto"/>
+        </Grid.RowDefinitions>
+
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="130"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <!-- Заголовок -->
+        <TextBlock Grid.Row="0" Grid.ColumnSpan="2" Text="Изменение данных клиента" 
+                   FontSize="14" FontWeight="Bold" Margin="0,0,0,15"/>
+
+        <!-- Основная информация -->
+        <TextBlock Grid.Row="1" Grid.Column="0" Text="ФИО:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="FullNameTextBox" Margin="0,0,0,5" Padding="3"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Дата рождения:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <DatePicker Grid.Row="2" Grid.Column="1" x:Name="BirthDatePicker" Margin="0,0,0,5" Padding="3"/>
+
+        <TextBlock Grid.Row="3" Grid.Column="0" Text="Телефон:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="3" Grid.Column="1" x:Name="PhoneTextBox" Margin="0,0,0,5" Padding="3"/>
+
+        <TextBlock Grid.Row="4" Grid.Column="0" Text="Email:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="4" Grid.Column="1" x:Name="EmailTextBox" Margin="0,0,0,5" Padding="3"/>
+
+        <!-- Информация о документе -->
+        <TextBlock Grid.Row="5" Grid.Column="0" Text="Основной документ:" Margin="0,10,5,5" HorizontalAlignment="Right"/>
+        <ComboBox x:Name="DocumentTypeComboBox" Grid.Row="5" Grid.Column="1" Margin="0,10,0,5" Padding="3">
+            <ComboBoxItem>Паспорт РФ</ComboBoxItem>
+            <ComboBoxItem>Водительское удостоверение</ComboBoxItem>
+            <ComboBoxItem>Загранпаспорт</ComboBoxItem>
+        </ComboBox>
+
+        <TextBlock Grid.Row="6" Grid.Column="0" Text="Серия:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="6" Grid.Column="1" x:Name="SeriesTextBox" Margin="0,0,0,5" Padding="3"/>
+
+        <TextBlock Grid.Row="7" Grid.Column="0" Text="Номер:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="7" Grid.Column="1" x:Name="NumberTextBox" Margin="0,0,0,5" Padding="3"/>
+
+        <TextBlock Grid.Row="8" Grid.Column="0" Text="Дата выдачи:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <DatePicker Grid.Row="8" Grid.Column="1" x:Name="IssueDatePicker" Margin="0,0,0,5" Padding="3"/>
+
+        <TextBlock Grid.Row="9" Grid.Column="0" Text="Код подразделения:" Margin="0,0,5,5" HorizontalAlignment="Right"/>
+        <TextBox Grid.Row="9" Grid.Column="1" x:Name="DepartmentCodeTextBox" Margin="0,0,0,5" Padding="3"/>
+
+        <!-- Кнопки -->
+        <StackPanel Grid.Row="11" Grid.ColumnSpan="2" Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,15,0,0">
+            <Button Content="Отмена" Click="CancelButton_Click" Margin="0,0,10,0" Padding="10,5" Width="80"/>
+            <Button Content="Сохранить изменения" Click="SaveButton_Click" Padding="10,5" Width="120" Background="#FF4CAF50" Foreground="White"/>
+        </StackPanel>
+    </Grid>
+</Window>

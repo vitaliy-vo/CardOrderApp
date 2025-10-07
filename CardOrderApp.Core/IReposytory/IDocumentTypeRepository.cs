@@ -2,8 +2,8 @@
 
 namespace CardOrderApp.DAL
 {
-    public interface IDocumetTypeRepository
+    public interface IDocumentTypeRepository
     {
-        Dictionary<int, DocumetTypeDto> GetTypeDocuments();
+        Dictionary<string, DocumetTypeDto> GetAllDocumentTypes();
     }
 }

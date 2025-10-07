@@ -49,6 +49,7 @@ namespace CardOrderApp.BLL
                 FirstName = customerInputModel.FirstName,
                 LastName = customerInputModel.LastName,
                 MiddleName = customerInputModel.MiddleName,
+                BirthDate = customerInputModel.BirthDate,
                 PhoneNumber = customerInputModel.PhoneNumber,
                 Email = customerInputModel.Email,
                 IsActive = customerInputModel.IsActive
@@ -57,12 +58,7 @@ namespace CardOrderApp.BLL
 
             };
 
-
-
-
-
-
-            return customerDto;
+          return customerDto;
         }
 
 
@@ -70,6 +66,7 @@ namespace CardOrderApp.BLL
         {
             CustomerDocumentDto customerDocumentDto = new ()
             {
+                СustomerId = customerDocumentInputModel.СustomerId,
                 DocumentTypeId= customerDocumentInputModel.DocumentTypeId,
                 Series= customerDocumentInputModel.Series,
                 Number= customerDocumentInputModel.Number,
@@ -77,13 +74,27 @@ namespace CardOrderApp.BLL
                 DepartmentCode = customerDocumentInputModel.DepartmentCode
 
             };
-
-
-
-
-
-
+            
             return customerDocumentDto;
         }
+
+        public CustomerInputModel GetCustomer(CustomerDto customerDto)
+        {
+            CustomerInputModel customer = new CustomerInputModel()
+            {
+                Id = customerDto.Id,
+                FirstName = customerDto.FirstName,
+                LastName = customerDto.LastName,
+                MiddleName = customerDto.MiddleName,
+                BirthDate = customerDto.BirthDate,
+                PhoneNumber = customerDto.PhoneNumber,
+                Email = customerDto.Email,
+                IsActive = customerDto.IsActive
+
+            };
+            return customer;
+        }
+        
+        
     }
 }

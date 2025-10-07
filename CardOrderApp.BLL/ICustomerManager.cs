@@ -9,5 +9,7 @@ namespace CardOrderApp.BLL
         CustomerDto AddClient(CustomerInputModel customerInputModel);
         CustomerDocumentDto AddDocument(CustomerDocumentInputModel customerDocumentInputModel);
         List<CustomerOutModel> GetAllCustomer();
+        CustomerInputModel GetCustomer(CustomerDto customerDto);
+
     }
 }

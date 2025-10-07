@@ -3,6 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="Поиск клиента" Height="436" Width="1008"
         WindowStartupLocation="CenterScreen">
+
     <Grid Margin="10">
         <Grid.RowDefinitions>
             <RowDefinition Height="Auto"/>
@@ -29,12 +30,14 @@
         <Button Grid.Row="1" Grid.Column="2" Content="Найти" Click="SearchButton_Click" Margin="0,0,0,5" Padding="10,3"/>
 
         <!-- Поиск по паспорту -->
-        <TextBlock Grid.Row="2" Grid.Column="0" Text="Паспорт:" VerticalAlignment="Center" Margin="0,0,5,5"/>
-        <TextBox Grid.Row="2" Grid.Column="1" x:Name="PassportSearchTextBox" VerticalAlignment="Center" Margin="0,0,5,5" Padding="3"
-                 />
+        <TextBlock Grid.Row="2" Grid.Column="0" Text="Cерия:" VerticalAlignment="Center" Margin="0,0,5,5"/>
+        <TextBox Grid.Row="2" Grid.Column="1" x:Name="PassportSeries" VerticalAlignment="Top" Margin="0,0,456,0" Padding="3"/>
+
+        <TextBlock Grid.Row="2" Grid.Column="1" Text="Номер:" VerticalAlignment="Top" Margin="347,4,378,0"/>
+        <TextBox Grid.Row="1" Grid.Column="1" x:Name="PassportNum" VerticalAlignment="Top" Margin="425,29,5,0" Padding="3" Grid.RowSpan="2"/>
         <Button Grid.Row="2" Grid.Column="2" Content="Найти" Click="SearchButton_Click" Margin="0,0,0,5" Padding="10,3"/>
 
-      
+
 
         <!-- Кнопка добавления клиента -->
         <Button Grid.Row="4" Grid.Column="2" Content="Добавить клиента" Click="AddClientButton_Click" 
@@ -42,15 +45,15 @@
 
         <!-- Результаты поиска -->
         <TextBlock Grid.Row="4" Grid.Column="0" Text="Результаты:" VerticalAlignment="Top" Margin="0,10,5,0"/>
-        <ListView Grid.Row="4" Grid.Column="1" x:Name="SearchResultsListView" Margin="0,10,5,0" Grid.ColumnSpan="1">
+        <ListView Grid.Row="4" Grid.Column="1" x:Name="SearchResultsListView" Margin="0,10,5,0" Grid.ColumnSpan="1" ItemsSource="{Binding Clients}" >
             <ListView.View>
                 <GridView>
                     <GridViewColumn Header="ФИО" Width="150" DisplayMemberBinding="{Binding FullName}"/>
                     <GridViewColumn Header="Серия" Width="100" DisplayMemberBinding="{Binding PassportSeries}"/>
                     <GridViewColumn Header="Номер" Width="100" DisplayMemberBinding="{Binding PassportNumber}"/>
-                    <GridViewColumn Header="Телефон" Width="120" DisplayMemberBinding="{Binding PhoneNumber}"/>
+                    <GridViewColumn Header="Телефон" Width="120" DisplayMemberBinding="{Binding Phone}"/>
                     <GridViewColumn Header="Email" Width="150" DisplayMemberBinding="{Binding Email}"/>
-                  
+
                     <GridViewColumn Header="Действия" Width="100">
                         <GridViewColumn.CellTemplate>
                             <DataTemplate>
@@ -63,8 +66,17 @@
                             </DataTemplate>
                         </GridViewColumn.CellTemplate>
                     </GridViewColumn>
+
                 </GridView>
             </ListView.View>
+            <ListView.ContextMenu>
+                <ContextMenu>
+                    <MenuItem Header="Заказать карту" Click="CreadeOrderCard"></MenuItem>
+                    <MenuItem Header="Вставить"></MenuItem>
+                    <MenuItem Header="Вырезать"></MenuItem>
+                    <MenuItem Header="Удалить"></MenuItem>
+                </ContextMenu>
+            </ListView.ContextMenu>
         </ListView>
 
         <!-- Статус -->
@@ -75,5 +87,6 @@
             <Button Content="Очистить фильтры" Click="ClearFiltersButton_Click" Margin="0,0,10,0" Padding="10,5"/>
             <Button Content="Обновить" Click="RefreshButton_Click" Padding="10,5"/>
         </StackPanel>
+       
     </Grid>
 </Window>
